@@ -1,0 +1,137 @@
+<html>
+<head>
+    <title>Scan_Me!</title>
+    <link href="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/simple-red-square-icons-business/128651-simple-red-square-icon-business-lock6-sc48.png" rel="shortcut icon">
+    <meta name="Melvin" content="UniMatrix">
+    <style>
+        body {
+            background-color: #1c1c1c; /* Dark background */
+            color: #ffffff; /* White text */
+            font-family: 'Courier New', Courier, monospace; /* Retro style font */
+            text-align: center;
+        }
+        #countdown {
+            font-size: 48px; /* Large countdown timer */
+            color: #ff0000; /* Red countdown */
+        }
+        .container {
+            border: 2px solid #ff0000; /* Red border */
+            padding: 20px;
+            width: 50%;
+            margin: 50px auto;
+            background-color: #333333; /* Darker grey background for content box */
+        }
+        .inpute {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ff0000; /* Red border around input */
+            background-color: #000000; /* Black background input */
+            color: #ffffff; /* White text */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff0000; /* Red button */
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e60000; /* Slightly darker red on hover */
+        }
+        a {
+            color: #ff0000; /* Red links */
+        }
+        a:hover {
+            color: #e60000; /* Darker red on hover */
+        }
+        #warning-text {
+            font-size: 18px;
+            color: #ffff00; /* Yellow warning text */
+        }
+        #prank-message {
+            display: none; /* Initially hide the prank message */
+            font-size: 18px;
+            color: #00ff00; /* Green text to indicate it's harmless */
+        }
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<script type="text/javascript">
+    // Countdown Timer Variables
+    var timeInSecs;
+    var ticker;
+
+    // Function to initialize the countdown to 60 seconds
+    function getSeconds() {
+        var countdownSecs = 60; // Set countdown to 60 seconds
+        startTimer(countdownSecs);
+    }
+
+    // Function to start the timer
+    function startTimer(secs) {
+        timeInSecs = parseInt(secs);
+        ticker = setInterval(tick, 1000); // Tick every 1 second
+        tick(); // Start counter display right away
+    }
+
+    // Function to handle ticking down every second
+    function tick() {
+        var secs = timeInSecs;
+        if (secs > 0) {
+            timeInSecs--;
+        } else {
+            clearInterval(ticker); // Stop counting at zero
+            document.getElementById("prank-message").style.display = "block"; // Show prank message when timer hits zero
+        }
+
+        var mins = Math.floor(secs / 60); // Calculate minutes
+        secs %= 60; // Calculate seconds left
+        var result = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs; // Format the time
+        document.getElementById("countdown").innerHTML = result; // Display the result
+    }
+
+    // Function to verify the unlock key
+    function myFunction() {
+        var enteredKey = document.querySelector('input[name="key"]').value; // Get the input key
+        var correctKey = "***************"; // Set the correct unlock key
+
+        if (enteredKey === correctKey) {
+            alert("Correct key! The site is unlocked.");
+            // You can redirect to another page or unlock content
+            window.location.href = "https://www.example.com"; // Example of redirection
+        } else {
+            alert("Incorrect key! Please try again.");
+        }
+    }
+</script>
+
+<body oncontextmenu="return false" onkeydown="return false" onmousedown="return false" onload="getSeconds()">
+    <div class="container">
+        <img src="http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Lock-icon.png" alt="Lock Icon">
+        <h1 style="color:#ff0000;">Your Device is Locked</h1>
+    
+
+        <form onsubmit="return false;">
+            <label for="key" style="color:#ffffff;">Enter your unlock key:</label><br>
+            <input type="text" name="key" class="inpute" placeholder="your unlock key"><br><br>
+            <button type="button" onclick="myFunction()">UNLOCK SITE</button>
+        </form>
+
+        <br>
+        <div id="warning-text">
+            All files will be deleted in: <br>
+            <span id="countdown">00:00</span> <!-- Countdown timer display -->
+        </div>
+
+        <br>
+        <p id="prank-message">
+            <b>This is just a prank. Your files are safe!</b><br>
+            <b>Follow me on Instagram: @_greyashboi</b>
+        </p>
+    </div>
+</body>
+</html>
